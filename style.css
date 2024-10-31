@@ -124,17 +124,3 @@ body {
     cursor: pointer;
     z-index: 1001; /* Ensure it is above the overlay */
 }
-
-.bmc-button {
-    display: block; /* Ensure it behaves like a block element */
-    margin: -35px 0 0 10px; /* Adjust margin to move it left and up */
-    width: 50px; /* Set a smaller width for the button */
-    height: auto; /* Maintain aspect ratio */
-    cursor: pointer; /* Show pointer on hover */
-    transition: transform 0.3s;
-    position: left; /* Use relative positioning for movement */
-}
-
-.bmc-button:hover {
-    transform: scale(1.05); /* Slightly enlarge on hover */
-}
