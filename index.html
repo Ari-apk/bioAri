@@ -7,14 +7,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Button to Start the Music -->
-    <button onclick="document.getElementById('background-audio').play()">Play Music</button>
-
     <!-- Background Music with Audio Tag -->
     <audio id="background-audio" loop>
         <source src="background-music.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
+
+    <!-- Overlay -->
+    <div id="overlay" class="overlay" onclick="playMusic()">
+        <span class="overlay-text">click to enter...</span>
+    </div>
 
     <div class="bio-container">
         <div class="profile-card">
@@ -23,7 +25,7 @@
             <p class="description">Hello! I am mostly a Unity Game Developer and a bit of a scripter. I have 2 years of experience!</p>
             <div class="alt-profile">
                 <span class="alt-text">my discord is: mirtis1</span>
-                <span class="alt-status">and i just bought this domain for fun</span>
+                <span class="alt-status">and I just bought this domain for fun</span>
             </div>
             <div class="social-icons">
                 <i class="fab fa-tiktok"></i>
@@ -34,7 +36,42 @@
                 <i class="fab fa-twitch"></i>
                 <i class="fas fa-images"></i>
             </div>
+            <!-- Buy Me a Coffee Button -->
+            <a href="https://buymeacoffee.com/arivr/" target="_blank">
+                <img id="bmc-button" class="bmc-button" src="bmac.png" alt="Buy Me a Coffee" />
+            </a>
         </div>
     </div>
+
+    <!-- Mute Button -->
+    <img id="mute-button" class="mute-button" src="mute-icon.png" alt="Mute/Unmute" onclick="toggleMute()">
+
+    <script>
+        // Function to play audio
+        function playMusic() {
+            var audio = document.getElementById('background-audio');
+            audio.play().catch(function(error) {
+                console.error("Audio playback failed:", error);
+            });
+            // Hide the overlay after the first click
+            document.getElementById('overlay').style.display = 'none';
+        }
+
+        // Toggle mute function
+        function toggleMute() {
+            var audio = document.getElementById('background-audio');
+            audio.muted = !audio.muted; // Toggle the muted state
+            // Change the mute button icon based on the audio state
+            document.getElementById('mute-button').src = audio.muted ? 'mute-icon.png' : 'mute-icon.png'; // Keep the same image
+        }
+
+        // Automatically play audio when the page loads (for the first interaction)
+        window.onload = function() {
+            var audio = document.getElementById('background-audio');
+            audio.play().catch(function(error) {
+                console.log("Audio play failed automatically, waiting for user interaction:", error);
+            });
+        };
+    </script>
 </body>
 </html>

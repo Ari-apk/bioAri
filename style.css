@@ -17,6 +17,7 @@ body {
     background: #000 url('background.jpg') no-repeat center center fixed;
     background-size: cover;
     color: white;
+    position: relative; /* Added for absolute positioning of overlay */
 }
 
 .bio-container {
@@ -27,6 +28,7 @@ body {
     background: rgba(0, 0, 0, 0.8);
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    position: relative; /* Added for absolute positioning */
 }
 
 .profile-card {
@@ -89,4 +91,50 @@ body {
 
 .social-icons i:hover {
     color: #FFD700; /* Gold on hover */
+}
+
+/* Styles for Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7); /* Dark transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 2em; /* Adjust as needed */
+    z-index: 1000; /* Ensure it covers other elements */
+}
+
+.overlay-text {
+    text-align: center;
+    pointer-events: none; /* Allow clicks to go through to the overlay */
+}
+
+/* Styles for Mute Button */
+.mute-button {
+    position: absolute; /* Position the button in the top left corner */
+    top: 20px;
+    left: 20px;
+    width: 40px; /* Adjust width as needed */
+    height: 40px; /* Adjust height as needed */
+    cursor: pointer;
+    z-index: 1001; /* Ensure it is above the overlay */
+}
+
+.bmc-button {
+    display: block; /* Ensure it behaves like a block element */
+    margin: -35px 0 0 10px; /* Adjust margin to move it left and up */
+    width: 50px; /* Set a smaller width for the button */
+    height: auto; /* Maintain aspect ratio */
+    cursor: pointer; /* Show pointer on hover */
+    transition: transform 0.3s;
+    position: left; /* Use relative positioning for movement */
+}
+
+.bmc-button:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
 }
