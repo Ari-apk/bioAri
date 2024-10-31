@@ -4794,7 +4794,7 @@ try {
 		}({}, !1) : void 0), check: o
 	}
 }, function (e, t) {
-	e.exports = "\t\n\v\f\r   ᠎             　\u2028\u2029\ufeff"
+	e.exports = "\t\n\v\f\r   ᠎             　\u2028\u2029\ufeff"
 }, function (e, t, i) {
 	var r = i(6), n = i(102).set;
 	e.exports = function (e, t, i) {
