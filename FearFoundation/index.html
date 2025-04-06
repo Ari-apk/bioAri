@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Park Rangers - ARI.APK</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <!-- HEADER / NAVIGATION -->
+  <header class="navbar">
+    <div class="logo">ARI.APK</div>
+    <nav>
+      <ul class="nav-links">
+      <li><a href="privacy-policy.html">Privacy Policy</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main class="content">
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <div class="hero-overlay">
+        <h1>Park Rangers</h1>
+      </div>
+    </section>
+
+    <!-- ABOUT & GALLERY SECTION -->
+    <section class="info-section">
+      <!-- GALLERY -->
+      <div class="gallery">
+        <img src="images/thumbnail1.jpg" alt="Scene 1" />
+        <img src="images/thumbnail2.jpg" alt="Scene 2" />
+        <img src="images/thumbnail3.jpg" alt="Scene 3" />
+        <img src="images/thumbnail4.jpg" alt="Scene 4" />
+      </div>
+
+      <!-- ABOUT -->
+      <div class="about">
+        <h2>ABOUT</h2>
+        <p>
+          When in Park Rangers, prepare for the best immersive horror experience.
+          Take on the spookiest foes in spine-chilling VR battles.
+        </p>
+        <p>
+          Welcome to the digital multiplayer realm, facing scary tunnels and
+          haunted environments. Team up or brave it alone—this is Park Rangers.
+        </p>
+      </div>
+
+      <!-- PURCHASE CARD -->
+      <div class="purchase-card">
+        <h3>Park Rangers</h3>
+        <p class="genre">Action / VR / Horror</p>
+        <!-- Updated button to link to meta.com -->
+        <a class="btn-buy" 
+           href="https://www.meta.com/en-gb/experiences/9174987392578353/"
+           target="_blank" 
+           rel="noopener noreferrer">
+          Get It Now
+        </a>
+      </div>
+    </section>
+
+    <!-- LIGHTBOX SECTION (hidden by default) -->
+    <div id="lightbox" class="lightbox">
+      <!-- Close button -->
+      <span class="lightbox-close">&times;</span>
+      <!-- Full-size image -->
+      <img class="lightbox-content" id="lightbox-img" />
+      <!-- Caption (optional) -->
+      <div id="lightbox-caption"></div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 ARI.APK</p>
+  </footer>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
