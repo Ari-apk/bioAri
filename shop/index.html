@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ari.apk's shop</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Segoe UI', sans-serif; background: #121212; color: #ddd; line-height: 1.6; }
+    header { position: fixed; width: 100%; background: #111; padding: 1rem 0; z-index: 1000; }
+    nav { display: flex; justify-content: center; gap: 2rem; }
+    nav a {
+      color: #88cfff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.5rem;
+      transition: background 0.3s ease;
+    }
+    nav a:hover, nav a.active {
+      background: #333;
+      border-radius: 4px;
+    }
+    main { padding: 6rem 1.5rem 4rem; max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 2.5rem; color: #88cfff; text-align: center; margin-bottom: 1rem; }
+    h2 { color: #88cfff; margin-bottom: 0.5rem; }
+    .btn { display: inline-block; padding: 0.75rem 1.25rem; background: #88cfff; color: #111; border: none; border-radius: 4px; text-decoration: none; font-weight: bold; margin-top: 1rem; }
+    .btn:hover { background: #a0d4ff; }
+    ul { list-style: disc inside; }
+    footer { background: #111; text-align: center; padding: 1rem; font-size: 0.9rem; }
+    section { padding: 2rem 0; border-bottom: 1px solid #333; }
+    section.active { background: #1a1a1a; }
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a href="#about" id="nav-about">About</a>
+    <a href="#services" id="nav-services">Services</a>
+    <a href="#contact" id="nav-contact">Contact</a>
+    <a href="#policies" id="nav-policies">Policies</a>
+  </nav>
+</header>
+
+<main>
+  <section id="about">
+    <h1>ari.apk's shop</h1>
+    <p>I’m a Unity developer creating and selling digital content including scripts, 3D models, tools, and Unity packages. My work is available online through Ko-fi.</p>
+    <a class="btn" href="https://ko-fi.com/ariapk" target="_blank">Visit My Ko-fi</a>
+  </section>
+
+  <section id="services">
+    <h2>Services</h2>
+    <ul>
+      <li>Unity packages</li>
+      <li>Custom scripts and tools</li>
+      <li>3D models for games</li>
+    </ul>
+  </section>
+
+  <section id="contact">
+    <h2>Contact</h2>
+    <p>Email: <a href="mailto:arijusarneolis123@gmail.com" style="color: #88cfff;">arijusarneolis123@gmail.com</a></p>
+  </section>
+
+  <section id="policies">
+    <h2>Policies</h2>
+    <h3>Refund & Dispute Policy</h3>
+    <p>All digital products are non-refundable once delivered. If you experience any issues, please contact me for assistance.</p>
+
+    <h3>Cancellation Policy</h3>
+    <p>Orders for digital goods cannot be canceled after delivery. For project-based work, cancellations must be discussed before final delivery.</p>
+
+    <h3>Legal Restrictions</h3>
+    <p>All content is for personal or commercial use in games. Redistribution or resale of my assets is not allowed.</p>
+  </section>
+</main>
+
+<footer>
+  &copy; 2025 ari.apk's shop
+</footer>
+
+<script>
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+
+  navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const targetId = link.getAttribute('href').substring(1);
+      const targetSection = document.getElementById(targetId);
+
+      sections.forEach(section => section.classList.remove('active'));
+      targetSection.classList.add('active');
+
+      navLinks.forEach(nav => nav.classList.remove('active'));
+      link.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
