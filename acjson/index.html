@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <button id="modeToggle" title="Toggle Light/Dark">🌙</button>
   <header>
     <h1>Animal Company JSON Maker</h1>
     <div class="accent-bar"></div>
@@ -14,6 +15,8 @@
   </header>
   <main>
     <div class="card">
+      <label for="searchItemID">Search Item ID:</label>
+      <input type="text" id="searchItemID" placeholder="Type to filter item IDs...">
       <section id="mode-toggle">
         <button id="loadout-btn" class="active">Loadout</button>
         <button id="stash-btn">Stash</button>
@@ -21,12 +24,17 @@
       <section id="editor">
         <div id="slots"></div>
       </section>
+      <div class="import-export-btns">
+        <button id="import-json">Import JSON</button>
+        <button id="generate-json">Generate JSON</button>
+        <button id="download-json">Download JSON</button>
+        <input type="file" id="jsonFileInput" accept=".json" style="display:none" />
+      </div>
     </div>
     <div class="card" id="json-preview">
-      <h2>JSON Preview</h2>
-      <pre id="json-output"></pre>
+      <h2>Generated JSON:</h2>
+      <textarea id="json-output" readonly></textarea>
       <button id="copy-json">Copy JSON</button>
-      <button id="download-json">Download JSON</button>
     </div>
   </main>
   <footer>
