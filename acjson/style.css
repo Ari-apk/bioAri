@@ -1,0 +1,394 @@
+:root {
+  --bg: #181a20;
+  --bg-alt: #23262f;
+  --fg: #f4f4f4;
+  --accent: #4f8cff;
+  --accent2: #ff4f8c;
+  --border: #2a2d36;
+  --button-bg: #23262f;
+  --button-hover: #2a2d36;
+  --input-bg: #23262f;
+  --input-fg: #f4f4f4;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: var(--bg-alt);
+  padding: 1.5rem 2rem 1rem 2rem;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+header h1 {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+#status {
+  font-size: 0.93rem;
+  color: var(--accent);
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  padding: 2rem;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+#mode-toggle {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+#mode-toggle button {
+  background: var(--button-bg);
+  color: var(--fg);
+  border: none;
+  padding: 0.7rem 1.5rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#mode-toggle button.active, #mode-toggle button:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+#editor {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+#slots {
+  flex: 1 1 300px;
+  background: var(--bg-alt);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px #0002;
+  min-width: 300px;
+}
+
+#item-picker {
+  flex: 1 1 300px;
+  background: var(--bg-alt);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px #0002;
+  min-width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#item-picker button {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 1rem;
+  background: none;
+  color: var(--fg);
+  border: none;
+  border-radius: 0.3rem;
+  margin-bottom: 0.2rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+#item-picker button:hover, #item-picker button.selected {
+  background: var(--accent2);
+  color: #fff;
+}
+
+#json-preview {
+  background: var(--bg-alt);
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px #0002;
+}
+
+#json-preview h2 {
+  margin-top: 0;
+}
+
+#json-output {
+  background: #11131a;
+  color: #b8e1ff;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  overflow-x: auto;
+  min-height: 120px;
+  margin-bottom: 1rem;
+}
+
+#copy-json, #download-json {
+  background: var(--button-bg);
+  color: var(--fg);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.4rem;
+  font-size: 1rem;
+  margin-right: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+#copy-json:hover, #download-json:hover {
+  background: var(--accent);
+  color: #fff;
+}
+
+footer {
+  background: var(--bg-alt);
+  color: #888;
+  text-align: center;
+  padding: 1rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.95rem;
+}
+
+footer a {
+  color: var(--accent2);
+  text-decoration: none;
+}
+
+input[type="number"], select {
+  background: var(--input-bg);
+  color: var(--input-fg);
+  border: 1px solid var(--border);
+  border-radius: 0.22rem;
+  padding: 0.18rem 0.5rem;
+  font-size: 0.93rem;
+  margin-bottom: 0.1rem;
+  margin-right: 0.1rem;
+  outline: none;
+  transition: border 0.2s, box-shadow 0.2s;
+  height: 1.7rem;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+input[type="number"]:focus, select:focus {
+  border: 1.5px solid var(--accent);
+  box-shadow: 0 0 0 1px #4f8cff33;
+}
+
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23b8e1ff" height="16" viewBox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 0.4rem center;
+  background-size: 0.9em;
+  padding-right: 1.3em;
+  min-width: 6.5rem;
+}
+
+.slot, .stash-root {
+  background: var(--bg-alt);
+  border-radius: 0.35rem;
+  padding: 0.5rem 0.5rem 0.3rem 0.5rem;
+  box-shadow: 0 1px 2px #0001;
+  margin-bottom: 0.5rem;
+  margin-top: 0.2rem;
+  border: 1px solid #23262f;
+  max-width: 320px;
+}
+
+.stash-root > select, .slot > select {
+  margin-bottom: 0.2rem;
+  width: 100%;
+}
+
+.child-editor, .stash-root > .child-editor {
+  margin-left: 0.7rem;
+  margin-top: 0.2rem;
+  background: #23262f;
+  border-radius: 0.22rem;
+  padding: 0.18rem 0.5rem 0.18rem 0.5rem;
+  box-shadow: 0 1px 2px #0001;
+  position: relative;
+  border: 1px solid #23262f;
+  display: flex;
+  align-items: center;
+  gap: 0.18rem;
+  flex-wrap: nowrap;
+}
+
+.child-editor > select {
+  min-width: 6.5rem;
+  max-width: 8rem;
+}
+.child-editor > input[type="number"] {
+  min-width: 4.2rem;
+  max-width: 5.2rem;
+  flex: 0 0 4.2rem;
+}
+
+.child-editor > button.add-child, .child-editor > button.remove-child {
+  min-width: 1.7rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  margin-left: 0.18rem;
+  margin-right: 0;
+}
+
+.child-editor > button.add-child {
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  background: var(--button-bg);
+  border-radius: 50%;
+}
+.child-editor > button.add-child:hover, .child-editor > button.add-child:focus {
+  background: var(--accent);
+  color: #fff;
+}
+
+.child-editor > button.remove-child {
+  background: var(--accent2);
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+}
+.child-editor > button.remove-child:hover, .child-editor > button.remove-child:focus {
+  background: #ff2a6d;
+  color: #fff;
+}
+
+.child-editor > button span {
+  display: none;
+}
+
+button.add-child, button.remove-child {
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+button.add-child[title]:hover::after, button.add-child[title]:focus::after {
+  content: attr(title);
+  position: absolute;
+  left: 100%;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #23262f;
+  color: #fff;
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.2rem;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 10;
+  margin-left: 0.3rem;
+  box-shadow: 0 2px 8px #0003;
+}
+
+button {
+  background: var(--button-bg);
+  color: var(--fg);
+  border: none;
+  padding: 0.22rem 0.7rem;
+  border-radius: 0.22rem;
+  font-size: 0.93rem;
+  margin-right: 0.1rem;
+  margin-top: 0;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  min-width: 0;
+  box-sizing: border-box;
+  outline: none;
+}
+
+button:hover, button:focus {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 1px 4px #4f8cff33;
+}
+
+button.remove-child {
+  background: var(--accent2);
+  color: #fff;
+  margin-left: 0.1rem;
+  padding: 0.22rem 0.5rem;
+  font-size: 1.05rem;
+  border-radius: 50%;
+  min-width: 1.7rem;
+  min-height: 1.7rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: none;
+}
+
+button.remove-child:hover, button.remove-child:focus {
+  background: #ff2a6d;
+  color: #fff;
+  box-shadow: 0 1px 4px #ff2a6d33;
+}
+
+button.add-child {
+  background: var(--button-bg);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  margin-left: 0.1rem;
+  padding: 0.22rem 0.7rem;
+  font-size: 0.93rem;
+  border-radius: 0.22rem;
+  min-width: 0;
+  height: 1.7rem;
+  box-sizing: border-box;
+}
+
+button.add-child:hover, button.add-child:focus {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 1px 4px #4f8cff33;
+}
+
+@media (max-width: 800px) {
+  main {
+    padding: 1rem;
+  }
+  #editor {
+    flex-direction: column;
+    gap: 1rem;
+  }
+  #slots, #item-picker {
+    min-width: unset;
+    width: 100%;
+  }
+  .slot, .stash-root {
+    padding: 0.3rem 0.1rem 0.1rem 0.1rem;
+    max-width: 100%;
+  }
+  .child-editor, .stash-root > .child-editor {
+    padding: 0.1rem 0.1rem 0.1rem 0.2rem;
+  }
+} 

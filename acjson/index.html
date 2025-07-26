@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Company JSON Maker</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Animal Company JSON Maker</h1>
+    <div id="status">ACTools Status: <span id="actools-status">Loading...</span></div>
+  </header>
+  <main>
+    <section id="mode-toggle">
+      <button id="loadout-btn" class="active">Loadout</button>
+      <button id="stash-btn">Stash</button>
+    </section>
+    <section id="editor">
+      <div id="slots"></div>
+      <div id="item-picker"></div>
+    </section>
+    <section id="json-preview">
+      <h2>JSON Preview</h2>
+      <pre id="json-output"></pre>
+      <button id="copy-json">Copy JSON</button>
+      <button id="download-json">Download JSON</button>
+    </section>
+  </main>
+  <footer>
+    <p>Made for Animal Company
+  </footer>
+  <script src="script.js"></script>
+</body>
+</html> 
