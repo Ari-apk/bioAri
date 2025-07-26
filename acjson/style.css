@@ -12,8 +12,8 @@
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: linear-gradient(135deg, #181a20 0%, #23243a 100%);
+  color: #f4f4f4;
   font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
   margin: 0;
   min-height: 100vh;
@@ -22,34 +22,60 @@ body {
 }
 
 header {
-  background: var(--bg-alt);
-  padding: 1.5rem 2rem 1rem 2rem;
-  border-bottom: 1px solid var(--border);
+  background: transparent;
+  padding: 2.2rem 2rem 1.2rem 2rem;
+  border-bottom: none;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  position: relative;
 }
 
 header h1 {
   margin: 0 0 0.5rem 0;
-  font-size: 1.1rem;
-  font-weight: 600;
+  font-size: 2.2rem;
+  font-weight: 800;
   letter-spacing: 0.01em;
+  color: #b8bfff;
+  position: relative;
+  z-index: 1;
+}
+
+header .accent-bar {
+  width: 60px;
+  height: 5px;
+  background: linear-gradient(90deg, #6a7cff 0%, #b86aff 100%);
+  border-radius: 3px;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
 }
 
 #status {
-  font-size: 0.93rem;
-  color: var(--accent);
+  font-size: 1.1rem;
+  color: #6a7cff;
+  margin-top: 0.2rem;
+  font-weight: 500;
 }
 
 main {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
-  padding: 2rem;
+  gap: 2.2rem;
+  padding: 2.2rem 1rem 1.5rem 1rem;
   max-width: 900px;
   margin: 0 auto;
+}
+
+.card {
+  background: rgba(30, 32, 48, 0.98);
+  border-radius: 1.2rem;
+  box-shadow: 0 4px 32px #0004, 0 1.5px 8px #6a7cff22;
+  padding: 2rem 1.5rem 1.5rem 1.5rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
 }
 
 #mode-toggle {
@@ -121,25 +147,30 @@ main {
 }
 
 #json-preview {
-  background: var(--bg-alt);
-  border-radius: 1rem;
+  background: #181a20;
+  border-radius: 1.2rem;
   padding: 1.5rem;
-  box-shadow: 0 2px 8px #0002;
+  box-shadow: 0 2px 16px #0003;
+  margin-top: 1.2rem;
 }
 
 #json-preview h2 {
   margin-top: 0;
+  color: #b8e1ff;
+  font-size: 1.2rem;
+  font-weight: 700;
 }
 
 #json-output {
-  background: #11131a;
+  background: #23243a;
   color: #b8e1ff;
   padding: 1rem;
-  border-radius: 0.5rem;
+  border-radius: 0.7rem;
   font-size: 1rem;
   overflow-x: auto;
   min-height: 120px;
   margin-bottom: 1rem;
+  font-family: 'Fira Mono', 'Consolas', monospace;
 }
 
 #copy-json, #download-json {
@@ -160,38 +191,36 @@ main {
 }
 
 footer {
-  background: var(--bg-alt);
+  background: transparent;
   color: #888;
   text-align: center;
-  padding: 1rem;
-  border-top: 1px solid var(--border);
-  font-size: 0.95rem;
+  padding: 1.2rem 0 0.7rem 0;
+  font-size: 1rem;
 }
 
 footer a {
-  color: var(--accent2);
+  color: #b86aff;
   text-decoration: none;
 }
 
-input[type="number"], select {
-  background: var(--input-bg);
-  color: var(--input-fg);
-  border: 1px solid var(--border);
-  border-radius: 0.22rem;
-  padding: 0.18rem 0.5rem;
-  font-size: 0.93rem;
-  margin-bottom: 0.1rem;
-  margin-right: 0.1rem;
+select, input[type="number"] {
+  background: #23243a;
+  color: #f4f4f4;
+  border: 1.5px solid #35365a;
+  border-radius: 0.5rem;
+  padding: 0.6rem 1rem;
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+  margin-right: 0.2rem;
   outline: none;
   transition: border 0.2s, box-shadow 0.2s;
-  height: 1.7rem;
   min-width: 0;
   box-sizing: border-box;
 }
 
-input[type="number"]:focus, select:focus {
-  border: 1.5px solid var(--accent);
-  box-shadow: 0 0 0 1px #4f8cff33;
+select:focus, input[type="number"]:focus {
+  border: 1.5px solid #6a7cff;
+  box-shadow: 0 0 0 2px #6a7cff33;
 }
 
 select {
@@ -207,14 +236,21 @@ select {
 }
 
 .slot, .stash-root {
-  background: var(--bg-alt);
-  border-radius: 0.35rem;
+  background: transparent;
+  border-radius: 0.7rem;
   padding: 0.5rem 0.5rem 0.3rem 0.5rem;
-  box-shadow: 0 1px 2px #0001;
+  box-shadow: none;
   margin-bottom: 0.5rem;
   margin-top: 0.2rem;
-  border: 1px solid #23262f;
-  max-width: 320px;
+  border: none;
+  max-width: 100%;
+}
+
+.slot > div:first-child, .stash-root > div:first-child {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #b8e1ff;
+  margin-bottom: 0.2rem;
 }
 
 .stash-root > select, .slot > select {
@@ -286,9 +322,64 @@ select {
   display: none;
 }
 
-button.add-child, button.remove-child {
-  overflow: hidden;
-  white-space: nowrap;
+button, .add-child, .remove-child {
+  background: linear-gradient(90deg, #6a7cff 0%, #b86aff 100%);
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.3rem;
+  border-radius: 0.7rem;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 0.3rem;
+  margin-top: 0.2rem;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s, box-shadow 0.18s;
+  min-width: 0;
+  box-sizing: border-box;
+  outline: none;
+  box-shadow: 0 2px 8px #6a7cff22;
+}
+
+button:hover, .add-child:hover, .remove-child:hover {
+  background: linear-gradient(90deg, #b86aff 0%, #6a7cff 100%);
+  color: #fff;
+  box-shadow: 0 2px 12px #b86aff33;
+}
+
+.add-child, .remove-child {
+  padding: 0.4rem 0.9rem;
+  font-size: 1.1rem;
+  border-radius: 50%;
+  min-width: 2.2rem;
+  min-height: 2.2rem;
+  width: 2.2rem;
+  height: 2.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 0.2rem;
+  margin-top: 0.1rem;
+  box-shadow: none;
+}
+
+.add-child {
+  background: linear-gradient(90deg, #23243a 0%, #6a7cff 100%);
+  color: #6a7cff;
+  border: 1.5px solid #6a7cff;
+}
+.add-child:hover {
+  background: linear-gradient(90deg, #6a7cff 0%, #b86aff 100%);
+  color: #fff;
+}
+
+.remove-child {
+  background: linear-gradient(90deg, #23243a 0%, #b86aff 100%);
+  color: #b86aff;
+  border: 1.5px solid #b86aff;
+}
+.remove-child:hover {
+  background: linear-gradient(90deg, #b86aff 0%, #6a7cff 100%);
+  color: #fff;
 }
 
 button.add-child[title]:hover::after, button.add-child[title]:focus::after {
@@ -374,7 +465,7 @@ button.add-child:hover, button.add-child:focus {
 
 @media (max-width: 800px) {
   main {
-    padding: 1rem;
+    padding: 1rem 0.2rem 1rem 0.2rem;
   }
   #editor {
     flex-direction: column;
@@ -384,11 +475,19 @@ button.add-child:hover, button.add-child:focus {
     min-width: unset;
     width: 100%;
   }
+  .card {
+    padding: 1.2rem 0.5rem 1rem 0.5rem;
+    border-radius: 0.7rem;
+  }
   .slot, .stash-root {
     padding: 0.3rem 0.1rem 0.1rem 0.1rem;
     max-width: 100%;
   }
   .child-editor, .stash-root > .child-editor {
     padding: 0.1rem 0.1rem 0.1rem 0.2rem;
+  }
+  #json-preview {
+    padding: 1rem;
+    border-radius: 0.7rem;
   }
 } 

@@ -9,26 +9,28 @@
 <body>
   <header>
     <h1>Animal Company JSON Maker</h1>
+    <div class="accent-bar"></div>
     <div id="status">ACTools Status: <span id="actools-status">Loading...</span></div>
   </header>
   <main>
-    <section id="mode-toggle">
-      <button id="loadout-btn" class="active">Loadout</button>
-      <button id="stash-btn">Stash</button>
-    </section>
-    <section id="editor">
-      <div id="slots"></div>
-      <div id="item-picker"></div>
-    </section>
-    <section id="json-preview">
+    <div class="card">
+      <section id="mode-toggle">
+        <button id="loadout-btn" class="active">Loadout</button>
+        <button id="stash-btn">Stash</button>
+      </section>
+      <section id="editor">
+        <div id="slots"></div>
+      </section>
+    </div>
+    <div class="card" id="json-preview">
       <h2>JSON Preview</h2>
       <pre id="json-output"></pre>
       <button id="copy-json">Copy JSON</button>
       <button id="download-json">Download JSON</button>
-    </section>
+    </div>
   </main>
   <footer>
-    <p>Made for Animal Company
+    <p>Made for Animal Company | <a href="https://ariapk.xyz" target="_blank">ariapk.xyz</a></p>
   </footer>
   <script src="script.js"></script>
 </body>
