@@ -2,6 +2,7 @@
 
 let items = [];
 let itemsById = {};
+let filteredItems = [];
 
 // Load items.json dynamically
 fetch('items.json')
@@ -9,6 +10,7 @@ fetch('items.json')
   .then(data => {
     items = data;
     itemsById = Object.fromEntries(items.map(i => [i.id, i]));
+    filteredItems = items;
     renderSlots();
     renderJSON();
   });
@@ -20,9 +22,11 @@ const slotsEl = document.getElementById('slots');
 const jsonOutputEl = document.getElementById('json-output');
 const copyBtn = document.getElementById('copy-json');
 const downloadBtn = document.getElementById('download-json');
-
-// Import/Export
-let importBtn, exportBtn, importInput;
+const importBtn = document.getElementById('import-json');
+const generateBtn = document.getElementById('generate-json');
+const jsonFileInput = document.getElementById('jsonFileInput');
+const searchInput = document.getElementById('searchItemID');
+const modeToggleBtn = document.getElementById('modeToggle');
 
 let mode = 'loadout';
 let loadout = {
@@ -37,6 +41,13 @@ let stash = {
   itemID: ''
 };
 
+// Light/Dark mode
+modeToggleBtn.onclick = () => {
+  document.body.classList.toggle('light-mode');
+  modeToggleBtn.textContent = document.body.classList.contains('light-mode') ? '🌞' : '🌙';
+};
+
+// ACTools status
 async function fetchStatus() {
   try {
     const res = await fetch('https://ac.xmodding.org/api/proxy-status');
@@ -68,6 +79,16 @@ stashBtn.onclick = () => {
   loadoutBtn.classList.remove('active');
   renderSlots();
   renderJSON();
+};
+
+searchInput.oninput = () => {
+  const term = searchInput.value.toLowerCase();
+  filteredItems = items.filter(i =>
+    i.id.toLowerCase().includes(term) ||
+    i.name.toLowerCase().includes(term) ||
+    (i.category && i.category.toLowerCase().includes(term))
+  );
+  renderSlots();
 };
 
 function getItemFields(itemId) {
@@ -102,7 +123,6 @@ function renderSlots() {
       renderJSON();
     }, 'Stash Item'));
   }
-  renderImportExport();
 }
 
 function renderItemEditor(obj, onChange, label) {
@@ -120,10 +140,10 @@ function renderItemEditor(obj, onChange, label) {
     div.appendChild(l);
   }
 
-  // Item select
+  // Item select + search
   const itemSelect = document.createElement('select');
   itemSelect.innerHTML = '<option value="">(none)</option>' +
-    items.map(i => `<option value="${i.id}">${i.name}</option>`).join('');
+    (filteredItems.length ? filteredItems : items).map(i => `<option value="${i.id}">${i.name} (${i.id})</option>`).join('');
   itemSelect.value = obj.itemID || '';
   itemSelect.onchange = e => {
     const newObj = { itemID: e.target.value };
@@ -145,6 +165,10 @@ function renderItemEditor(obj, onChange, label) {
   // Dynamic fields
   const fields = getItemFields(obj.itemID);
   fields.forEach(field => {
+    const wrap = document.createElement('div');
+    wrap.style.display = 'flex';
+    wrap.style.alignItems = 'center';
+    wrap.style.marginBottom = '0.2rem';
     const input = document.createElement('input');
     input.type = 'number';
     input.placeholder = field;
@@ -155,8 +179,19 @@ function renderItemEditor(obj, onChange, label) {
     input.oninput = e => {
       const newObj = { ...obj, [field]: e.target.value === '' ? undefined : Number(e.target.value) };
       onChange(newObj);
+      if (field === 'colorHue' || field === 'colorSaturation') updateColorPreview(div, newObj);
     };
-    div.appendChild(input);
+    wrap.appendChild(input);
+    // Color preview
+    if (field === 'colorSaturation') {
+      const colorBox = document.createElement('span');
+      colorBox.className = 'color-preview';
+      colorBox.style.marginLeft = '10px';
+      colorBox.style.backgroundColor = getColorPreview(obj);
+      colorBox.title = 'Live color preview';
+      wrap.appendChild(colorBox);
+    }
+    div.appendChild(wrap);
   });
 
   // Children
@@ -169,7 +204,8 @@ function renderItemEditor(obj, onChange, label) {
     childrenArr.forEach((child, idx) => {
       childrenDiv.appendChild(renderItemEditor(child, val => {
         const newChildren = [...childrenArr];
-        newChildren[idx] = val;
+        if (val === null) newChildren.splice(idx, 1);
+        else newChildren[idx] = val;
         onChange({ ...obj, children: newChildren });
       }));
     });
@@ -193,7 +229,19 @@ function renderItemEditor(obj, onChange, label) {
     removeBtn.onclick = () => onChange(null);
     div.appendChild(removeBtn);
   }
+  // Color preview update
+  updateColorPreview(div, obj);
   return div;
+}
+
+function getColorPreview(obj) {
+  const h = obj.colorHue || 0;
+  const s = obj.colorSaturation || 0;
+  return `hsl(${h}, ${s}%, 50%)`;
+}
+function updateColorPreview(div, obj) {
+  const colorBox = div.querySelector('.color-preview');
+  if (colorBox) colorBox.style.backgroundColor = getColorPreview(obj);
 }
 
 function getFieldTooltip(field, itemID) {
@@ -245,16 +293,16 @@ function renderJSON() {
       return o;
     }
   }
-  jsonOutputEl.textContent = JSON.stringify(clean(obj), null, 2);
+  jsonOutputEl.value = JSON.stringify(clean(obj), null, 2);
 }
 
 copyBtn.onclick = () => {
-  navigator.clipboard.writeText(jsonOutputEl.textContent);
+  navigator.clipboard.writeText(jsonOutputEl.value);
   copyBtn.textContent = 'Copied!';
   setTimeout(() => copyBtn.textContent = 'Copy JSON', 1200);
 };
 downloadBtn.onclick = () => {
-  const blob = new Blob([jsonOutputEl.textContent], { type: 'application/json' });
+  const blob = new Blob([jsonOutputEl.value], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
@@ -267,39 +315,24 @@ downloadBtn.onclick = () => {
   }, 100);
 };
 
-function renderImportExport() {
-  if (!importBtn) {
-    importBtn = document.createElement('button');
-    importBtn.textContent = 'Import JSON';
-    importBtn.onclick = () => importInput.click();
-    importInput = document.createElement('input');
-    importInput.type = 'file';
-    importInput.accept = '.json,application/json';
-    importInput.style.display = 'none';
-    importInput.onchange = e => {
-      const file = e.target.files[0];
-      if (!file) return;
-      const reader = new FileReader();
-      reader.onload = evt => {
-        try {
-          const data = JSON.parse(evt.target.result);
-          if (mode === 'loadout') loadout = data;
-          else stash = data;
-          renderSlots();
-          renderJSON();
-        } catch (err) {
-          alert('Invalid JSON');
-        }
-      };
-      reader.readAsText(file);
-    };
-    document.body.appendChild(importInput);
-  }
-  if (!exportBtn) {
-    exportBtn = document.createElement('button');
-    exportBtn.textContent = 'Export JSON';
-    exportBtn.onclick = () => downloadBtn.onclick();
-  }
-  if (!importBtn.parentNode) slotsEl.appendChild(importBtn);
-  if (!exportBtn.parentNode) slotsEl.appendChild(exportBtn);
-} 
+// Import JSON
+importBtn.onclick = () => jsonFileInput.click();
+jsonFileInput.onchange = e => {
+  const file = e.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = evt => {
+    try {
+      const data = JSON.parse(evt.target.result);
+      if (mode === 'loadout') loadout = data;
+      else stash = data;
+      renderSlots();
+      renderJSON();
+    } catch (err) {
+      alert('Invalid JSON');
+    }
+  };
+  reader.readAsText(file);
+};
+
+generateBtn.onclick = () => renderJSON(); 
